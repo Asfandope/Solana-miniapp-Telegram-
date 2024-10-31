@@ -1,0 +1,61 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  width: fit-content;
+  height: fit-content;
+  /* background: linear-gradient(#212121, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box; */
+  background: linear-gradient(#333333, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #ffd51c, #40ff60) border-box;
+  border: 2px solid transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  max-width: 280px;
+}
+
+.modal-content:hover {
+  cursor: pointer;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: rgb(240, 163, 21);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes fadePosUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px); /* Start from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End in the original position */
+  }
+}
+
+.animate-fade-up {
+  animation: fadePosUp 0.5s forwards;
+}
