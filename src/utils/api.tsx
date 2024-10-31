@@ -1,7 +1,7 @@
 import axios from 'axios';
+const baseUrl = import.meta.env.VITE_BASE_API_URL
 const api = axios.create({
-    // baseURL: `http://localhost:5000/api`,
-    baseURL: `https://t2e-hyena-backend.onrender.com/api`,
+    baseURL: baseUrl,
     headers: {
       'Content-Type': 'application/json'
     }

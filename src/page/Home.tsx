@@ -19,9 +19,9 @@ function Home() {
   const tapState = useSelector((state) => state.wallet.user?.tap);
   const limitState = useSelector((state) => state.wallet.user?.limit);
   const totalState = useSelector((state) => state.wallet.user?.totalPoint);
-  const passItemLevelState = useSelector(
-    (state) => state.wallet.user?.passItemLevel
-  );
+  // const passItemLevelState = useSelector(
+  //   (state) => state.wallet.user?.passItemLevel
+  // );
   const passItemStartTimeState = useSelector(
     (state) => state.wallet.user?.passItemStartTime
   );
@@ -33,12 +33,12 @@ function Home() {
   const [limit, setLimit] = useState<number>(limitState);
   const [total, setTotal] = useState<number>(totalState);
   const [isTouch, setIsTouch] = useState(false); // New state to track touch event
-  const [passItemStartTime, setpassItemStartTime] = useState<number>(
-    passItemStartTimeState
-  );
-  const [passItemLevel, setpassItemLevel] =
-    useState<number>(passItemLevelState);
-  let miningInterval: any;
+  // const [passItemStartTime, setpassItemStartTime] = useState<number>(
+  //   passItemStartTimeState
+  // );
+  // const [passItemLevel, setpassItemLevel] =
+  //   useState<number>(passItemLevelState);
+  // let miningInterval: any;
 
   useEffect(() => {
     // const TESTNAME = "Totchka_1803";
@@ -66,31 +66,31 @@ function Home() {
       });
     }
 
-    if (passItemLevelState) {
-      miningInterval = setInterval(() => {
-        // console.log("passive mining +", passItemLevel);
-        setToken((prevToken) => {
-          const tmp = prevToken + PassItemCount[passItemLevel];
-          return tmp;
-        });
+    // if (passItemLevelState) {
+    //   miningInterval = setInterval(() => {
+    //     // console.log("passive mining +", passItemLevel);
+    //     setToken((prevToken) => {
+    //       const tmp = prevToken + PassItemCount[passItemLevel];
+    //       return tmp;
+    //     });
 
-        setTotal((prevTotal) => {
-          const tmp = prevTotal + PassItemCount[passItemLevel];
-          return tmp;
-        });
-      }, 1000); // Mine every second
-      return () => {
-        clearInterval(miningInterval);
-      };
-    }
+    //     setTotal((prevTotal) => {
+    //       const tmp = prevTotal + PassItemCount[passItemLevel];
+    //       return tmp;
+    //     });
+    //   }, 1000); // Mine every second
+    //   return () => {
+    //     clearInterval(miningInterval);
+    //   };
+    // }
   }, []);
 
   // this will not used
-  if (total == -1) {
-    setpassItemStartTime(1);
-    console.log(passItemStartTime);
-    setpassItemLevel(-1);
-  }
+  // if (total == -1) {
+  //   setpassItemStartTime(1);
+  //   console.log(passItemStartTime);
+  //   setpassItemLevel(-1);
+  // }
   useEffect(() => {
     setLimit(limitState);
   }, [limitState]);
@@ -189,7 +189,7 @@ function Home() {
       <AnaylsisCard
         tapUnit={1}
         gdp={total}
-        passive={PassItemCount[passItemLevel]}
+        // passive={PassItemCount[passItemLevel]}
       />
       <div
         id="mainWindow"
