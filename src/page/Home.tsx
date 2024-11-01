@@ -11,7 +11,7 @@ import { CreateEffectForMine } from "../component/MoneyUpdateEffect";
 import { isMobile } from "react-device-detect";
 
 function Home() {
-  const PassItemCount = [0, 1, 2, 3, 4, 5];
+  // const PassItemCount = [0, 1, 2, 3, 4, 5];
   const audio = new Audio(soundEffect);
   const usernameState = useSelector((state) => state.wallet.user?.username);
   const tokenState = useSelector((state) => state.wallet.user?.balance);
@@ -22,9 +22,9 @@ function Home() {
   // const passItemLevelState = useSelector(
   //   (state) => state.wallet.user?.passItemLevel
   // );
-  const passItemStartTimeState = useSelector(
-    (state) => state.wallet.user?.passItemStartTime
-  );
+  // const passItemStartTimeState = useSelector(
+  //   (state) => state.wallet.user?.passItemStartTime
+  // );
   const [imgStatus, setImgStatus] = useState(false);
   const [tap, setTap] = useState<number>(tapState);
   const [username, setUsername] = useState<string>(usernameState);
