@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Phantom Wallet</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #connectButton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Connect Your Phantom Wallet</h1>
+        <button id="connectButton">Connect Phantom</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const connectButton = document.getElementById('connectButton');
+        const statusDiv = document.getElementById('status');
+
+        const isPhantomInstalled = window.solana && window.solana.isPhantom;
+
+        async function connectPhantom() {
+            try {
+                if (!isPhantomInstalled) {
+                    statusDiv.textContent = 'Phantom wallet is not installed. Please install it first.';
+                    window.open('https://phantom.app/', '_blank');
+                    return;
+                }
+
+                // Request connection to Phantom
+                const connection = await window.solana.connect();
+                const publicKey = connection.publicKey.toString();
+                
+                statusDiv.textContent = 'Connected! Public Key: ' + publicKey;
+
+                // Send the public key back to the parent window
+                if (window.opener) {
+                    window.opener.postMessage({
+                        type: 'PHANTOM_CONNECTED',
+                        publicKey: publicKey
+                    }, '*');
+                }
+            } catch (err) {
+                statusDiv.textContent = 'Connection failed: ' + err.message;
+                console.error('Error:', err);
+            }
+        }
+
+        connectButton.addEventListener('click', connectPhantom);
+
+        // Check if Phantom is installed on page load
+        if (!isPhantomInstalled) {
+            statusDiv.textContent = 'Phantom wallet is not installed. Please install it first.';
+            connectButton.textContent = 'Install Phantom';
+        }
+    </script>
+</body>
+</html> 
